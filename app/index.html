@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA 6-style cover maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">VC</span><span class="brand-name">Vice Cover Studio</span></div>
+  <p class="tagline">Turn your photos into a bold multi-panel poster cover. Photos stay on your machine.</p>
+</header>
+<main class="app" id="app">
+  <section class="panel controls" aria-label="Cover controls">
+    <h1>Make your cover</h1>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <label class="file-btn">Add photos from your machine
+        <input id="photoInput" type="file" accept="image/*" multiple>
+      </label>
+      <p class="hint">Or drop image files anywhere on the preview. Click a thumbnail to put that photo in the selected panel.</p>
+      <div class="samples">
+        <span>Try a sample:</span>
+        <button type="button" class="chip" data-sample="pier">Pier</button>
+        <button type="button" class="chip" data-sample="boulevard">Boulevard</button>
+      </div>
+      <div class="thumbs" id="thumbs" aria-label="Loaded photos"></div>
+      <p class="hint" id="photoCount">No photo loaded yet — pick a sample to start.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Layout</legend>
+      <div class="btn-row" id="layoutRow" role="group" aria-label="Panel layout">
+        <button type="button" data-layout="hero" class="on">Hero + sides</button>
+        <button type="button" data-layout="strip">3-panel strip</button>
+        <button type="button" data-layout="grid">Four-square grid</button>
+        <button type="button" data-layout="solo">Full-bleed solo</button>
+      </div>
+      <p class="hint">Click a panel on the preview to select it, then drag inside it to move the photo and scroll or use the slider to zoom.</p>
+      <label class="slider-label">Zoom selected panel
+        <input id="zoom" type="range" min="1" max="3" step="0.05" value="1.15">
+      </label>
+      <button type="button" id="resetPanel">Reset selected panel</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Caption &amp; colour</legend>
+      <label class="field">Cover title
+        <input id="caption" type="text" maxlength="28" value="Sunset Heist">
+      </label>
+      <label class="field">Tagline
+        <input id="tagline" type="text" maxlength="48" value="One last job under the neon sky">
+      </label>
+      <label class="slider-label">Title size
+        <input id="titleSize" type="range" min="60" max="140" step="2" value="104">
+      </label>
+      <div class="btn-row" id="gradeRow" role="group" aria-label="Colour grade">
+        <button type="button" data-grade="sunset" class="on">Vice sunset</button>
+        <button type="button" data-grade="neon">Neon nights</button>
+        <button type="button" data-grade="noir">Noir</button>
+        <button type="button" data-grade="clean">Clean</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Export</legend>
+      <label class="field">Cover size
+        <select id="sizeSelect">
+          <option value="1920x1080" selected>1920 × 1080 — wide</option>
+          <option value="1080x1350">1080 × 1350 — portrait</option>
+          <option value="1080x1080">1080 × 1080 — square</option>
+        </select>
+      </label>
+      <div class="btn-row export-row">
+        <button type="button" id="exportWide">PNG 1920×1080</button>
+        <button type="button" id="exportPortrait">PNG 1080×1350</button>
+        <button type="button" id="exportSquare">PNG 1080×1080</button>
+      </div>
+      <p class="hint">Exports the size you pick, whatever the preview is showing.</p>
+      <p id="status" role="status"></p>
+    </fieldset>
+  </section>
+
+  <section class="panel stage" aria-label="Live preview">
+    <div class="stage-head">
+      <h2>Live preview</h2>
+      <span id="sizeLabel">1920 × 1080</span>
+    </div>
+    <div class="canvas-wrap" id="dropZone">
+      <canvas id="cover" width="1920" height="1080" aria-label="Cover preview"></canvas>
+      <p class="drop-hint">Drop photos here</p>
+    </div>
+    <p class="hint">Selected panel: <strong id="selectedLabel">Hero</strong> — drag to pan, scroll to zoom.</p>
+  </section>
+</main>
+<footer class="foot">
+  <p>Original art and lettering only — no game logos, artwork or fonts. Display type: Anton (SIL Open Font License, see app/fonts/OFL.txt).</p>
+</footer>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
